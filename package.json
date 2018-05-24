@@ -7,7 +7,8 @@
   "author": "William Sandström",
   "license": "MIT",
   "scripts": {
-    "build": "webpack"
+    "start": "webpack-dev-server",
+    "build": "eslint *.js && webpack --config webpack.prod.js"
   },
   "dependencies": {
     "prop-types": "^15.6.1",
@@ -15,10 +16,17 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-react": "^7.8.2",
+    "react-dom": "^16.4.0",
     "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.4"
+    "webpack-cli": "^2.1.4",
+    "webpack-dev-server": "^3.1.4"
   }
 }

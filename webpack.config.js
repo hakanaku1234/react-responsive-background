@@ -1,13 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  entry: './index.js',
+  entry: './demo.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
-    library: 'react-responsive-background',
-    libraryTarget: 'umd',
   },
+  mode: 'development',
   module: {
     rules: [
       {
@@ -15,12 +14,10 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'stage-0'],
-        },
-      },
-    ],
-  },
-  externals: [
-    'react', 'prop-types'
-  ],
+          presets: ['stage-0', 'react', 'env'],
+          plugins: ['transform-class-properties'],
+        }
+      }
+    ]
+  }
 };

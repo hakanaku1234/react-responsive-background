@@ -1,4 +1,7 @@
+.eslintrc
 .babelrc
 .gitignore
 index.js
-webpack.config.js
+webpack.*.js
+demo.js
+index.html

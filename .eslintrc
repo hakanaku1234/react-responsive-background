@@ -1,0 +1,28 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true
+    },
+    "parser": "babel-eslint",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "babel",
+        "react"
+    ],
+    "globals": {
+        "__dirname": true
+    },
+    "rules": {
+        "babel/semi": 1,
+        "quotes": ["error", "single"]
+    }
+}

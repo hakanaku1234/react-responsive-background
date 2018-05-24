@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 
 export default class Responsive extends React.Component {
   static propTypes = {
+    children: PropTypes.any,
     srcset: PropTypes.string,
     sizes: PropTypes.string,
-    className: PropTypes.string,
+    component: PropTypes.node,
+    style: PropTypes.object,
+    className: PropTypes.string
+  };
+  static defaultProps = {
+    style: {}
   };
   state = {
-    src: null,
+    src: null
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const img = document.createElement('img');
     img.onload = () =>
       this.setState(
@@ -23,16 +29,21 @@ export default class Responsive extends React.Component {
   }
 
   render() {
-    const { children, ...props } = this.props;
-    const { src } = this.state;
+    const { children, component, style, className } = this.props;
+    const { src } = this.state;
+
+    const Component = component || 'div';
 
     return (
-      <div
-        {...props}
-        style={{ backgroundImage: 'url(' + this.state.src + ')'} }
+      <Component
+        className={className}
+        style={{
+          ...style,
+          backgroundImage: 'url(\'' + src + '\')'
+        }}
       >
         {children}
-      </div>
+      </Component>
     );
   }
 }
