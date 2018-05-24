@@ -8,7 +8,6 @@ module.exports = {
     library: 'react-responsive-background',
     libraryTarget: 'umd',
   },
-  mode: 'production',
   module: {
     rules: [
       {
@@ -16,12 +15,12 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['react'],
+          presets: ['react', 'stage-0'],
         },
       },
     ],
   },
   externals: [
     'react', 'prop-types'
-  ]
+  ],
 };
