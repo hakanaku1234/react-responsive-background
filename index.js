@@ -28,15 +28,23 @@ export default class Responsive extends React.Component {
     img.srcset = this.props.srcset;
   }
 
+  /* eslint-disable no-unused-vars */
   render() {
-    const { children, component, style, className } = this.props;
+    const {
+      children,
+      component,
+      style,
+      sizes,
+      srcset,
+      ...props
+    } = this.props;
     const { src } = this.state;
 
     const Component = component || 'div';
 
     return (
       <Component
-        className={className}
+        {...props}
         style={{
           ...style,
           backgroundImage: 'url(\'' + src + '\')'
