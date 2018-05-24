@@ -40,10 +40,16 @@ const Component = () => (
 
 ### Inject in existing components
 ```javascript
-import Responsive from 'react-responsive-background';
+import { makeResponsive } from 'react-responsive-background';
 
-// backgroundImage is set in style
-const Component = ({ style, children }) => (
+const srcset = `
+  https://placekitten.com/800/400 1200w,
+  https://placekitten.com/500/200 800w
+`;
+
+const sizes = '';
+
+const Component = ({ src, children }) => (
   <div
     style={{
       // set our styles
@@ -51,20 +57,22 @@ const Component = ({ style, children }) => (
       backgroundPosition: 'center center',
       backgroundSize: 'cover',
 
-      // add generated styles
-      ...style,
+      // set background image
+      backgroundImage: 'url(\'' + src + '\')'
     }}
   >
    {children}
   </div>
 );
 
-const Injected = () => (
-  <Responsive
-    component={Component}
-    prop="props gets sent to wrapped element"
-  >
+const WrappedComponent = makeResponsive({
+  srcset,
+  sizes
+})(Component);
+
+const Container = () => (
+  <WrappedComponent>
     Hello world
-  </Responsive>
+  </WrappedComponent>
 )
 ```

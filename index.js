@@ -1,57 +1,69 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class Responsive extends React.Component {
-  static propTypes = {
-    children: PropTypes.any,
-    srcset: PropTypes.string,
-    sizes: PropTypes.string,
-    component: PropTypes.node,
-    style: PropTypes.object,
-    className: PropTypes.string
-  };
-  static defaultProps = {
-    style: {}
-  };
-  state = {
-    src: null
-  };
+const createImage = ({ srcset, sizes, onLoad }) => {
+  const img = document.createElement('img');
+  img.onload = () => onLoad(img.currentSrc);
+  img.sizes = sizes;
+  img.srcset = srcset;
+};
 
-  componentDidMount() {
-    const img = document.createElement('img');
-    img.onload = () =>
-      this.setState(
-        { src: img.currentSrc },
-        () => this.forceUpdate()
-      );
-    img.sizes = this.props.sizes;
-    img.srcset = this.props.srcset;
-  }
+export const makeResponsive = ({ srcset, sizes }) => Component =>
+  class Responsive extends React.Component {
+    static propTypes = {
+      children: PropTypes.any
+    };
+    state = {
+      src: null
+    };
 
-  /* eslint-disable no-unused-vars */
-  render() {
-    const {
-      children,
-      component,
-      style,
-      sizes,
+    onLoad = src => this.setState({ src }, () => this.forceUpdate());
+
+    load = () => createImage({
       srcset,
-      ...props
-    } = this.props;
-    const { src } = this.state;
+      sizes,
+      onLoad: this.onLoad,
+    });
 
-    const Component = component || 'div';
+    componentDidMount() {
+      this.load();
+    }
 
-    return (
-      <Component
-        {...props}
-        style={{
-          ...style,
-          backgroundImage: 'url(\'' + src + '\')'
-        }}
-      >
-        {children}
-      </Component>
-    );
-  }
+    render() {
+      const { children } = this.props;
+      const { src } = this.state;
+
+      return (
+        <Component src={src} {...this.props}>
+          {children}
+        </Component>
+      );
+    }
+  };
+
+const Container = ({ src, children, ...props }) => (
+  <div
+    style={{
+      backgroundImage: 'url(\'' + src + '\')'
+    }}
+    {...props}
+  >
+    {children}
+  </div>
+);
+
+Container.propTypes = {
+  src: PropTypes.any,
+  children: PropTypes.any,
+};
+
+export default function Responsive(props) {
+  const Component = makeResponsive(props)(Container);
+  return <Component {...props}>{props.children}</Component>;
 }
+
+Responsive.propTypes = {
+  srcset: PropTypes.string,
+  sizes: PropTypes.string,
+  children: PropTypes.any
+};
