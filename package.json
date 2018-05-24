@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-background",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Responsive background-images",
   "main": "dist/index.js",
   "repository": "https://github.com/wille/react-responsive-background",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "prop-types": "^15.6.1",
-    "react": "^16.3.2"
+    "react": "^16.4.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
