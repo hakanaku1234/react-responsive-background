@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-background",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Responsive background-images",
   "main": "dist/index.js",
   "repository": "https://github.com/wille/react-responsive-background",
@@ -8,7 +8,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "eslint *.js && webpack --config webpack.prod.js"
+    "build": "eslint *.js && webpack --config webpack.prod.js",
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "prop-types": "^15.6.1",
