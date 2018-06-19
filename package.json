@@ -12,8 +12,8 @@
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
-    "prop-types": "^15.6.1",
-    "react": "^16.4.0"
+    "prop-types": "^15.0.0",
+    "react": "^16.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
