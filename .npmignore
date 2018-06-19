@@ -5,3 +5,4 @@ index.js
 webpack.*.js
 demo.js
 index.html
+yarn.lock
