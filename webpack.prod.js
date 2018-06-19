@@ -7,5 +7,6 @@ base.mode = 'production';
 base.externals = [
   'react', 'prop-types'
 ];
+base.output.globalObject = 'this';
 
 module.exports = base;
