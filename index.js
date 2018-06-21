@@ -18,7 +18,14 @@ export const makeResponsive = ({ src, srcset, sizes }) => Component =>
       src: null
     };
 
-    onLoad = src => this.setState({ src }, () => this.forceUpdate());
+    onLoad = src => {
+      if (this.mounted) {
+        this.setState({
+          src
+        },
+        () => this.forceUpdate());
+      }
+    };
 
     load = () => createImage({
       src,
@@ -28,7 +35,12 @@ export const makeResponsive = ({ src, srcset, sizes }) => Component =>
     });
 
     componentDidMount() {
+      this.mounted = true;
       this.load();
+    }
+
+    componentWillUnmount() {
+      this.mounted = false;
     }
 
     render() {
