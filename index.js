@@ -9,14 +9,19 @@ const createImage = ({ src, srcset, sizes, onLoad }) => {
   img.srcset = srcset;
 };
 
-export const makeResponsive = ({ src, srcset, sizes }) => Component =>
+export const makeResponsive = ({ src, srcset, sizes, initial }) => Component =>
   class Responsive extends React.Component {
     static propTypes = {
       children: PropTypes.any
     };
-    state = {
-      src: null
-    };
+
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        src: initial
+      };
+    }
 
     onLoad = src => {
       if (this.mounted) {
@@ -56,16 +61,12 @@ export const makeResponsive = ({ src, srcset, sizes }) => Component =>
   };
 
 function Container({ src, children, ...props }) {
-  const newProps = { ...props };
-  delete newProps.src;
-  delete newProps.srcset;
-  delete newProps.sizes;
   return (
     <div
       style={{
         backgroundImage: 'url(\'' + src + '\')'
       }}
-      {...newProps}
+      {...props}
     >
       {children}
     </div>
@@ -79,13 +80,7 @@ Container.propTypes = {
 
 export default function Responsive(props) {
   const Component = makeResponsive(props)(Container);
-
-  const newProps = { ...props };
-  delete newProps.src;
-  delete newProps.srcset;
-  delete newProps.sizes;
-
-  return <Component {...newProps}>{props.children}</Component>;
+  return <Component {...props}>{props.children}</Component>;
 }
 
 Responsive.propTypes = {
