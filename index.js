@@ -27,8 +27,7 @@ export const makeResponsive = ({ src, srcset, sizes, initial }) => Component =>
       if (this.mounted) {
         this.setState({
           src
-        },
-        () => this.forceUpdate());
+        });
       }
     };
 
