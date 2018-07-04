@@ -9,7 +9,7 @@ const createImage = ({ src, srcset, sizes, onLoad }) => {
   img.srcset = srcset;
 };
 
-export const makeResponsive = ({ src, srcset, sizes, initial }) => Component =>
+export const makeResponsive = ({ src, srcset, sizes }) => Component =>
   class Responsive extends React.Component {
     static propTypes = {
       children: PropTypes.any
@@ -19,7 +19,7 @@ export const makeResponsive = ({ src, srcset, sizes, initial }) => Component =>
       super(props);
 
       this.state = {
-        src: initial
+        src
       };
     }
 
