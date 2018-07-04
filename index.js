@@ -1,9 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const cache = {};
+const getKey = props => JSON.stringify(props);
+const getCached = props => cache[getKey(props)];
+
 const createImage = ({ src, srcset, sizes, onLoad }) => {
   const img = document.createElement('img');
-  img.onload = () => onLoad(img.currentSrc || img.src);
+  img.onload = () => {
+    const src = img.currentSrc || img.src;
+    cache[getKey({ srcset, sizes })] = src;
+    onLoad(src);
+  };
   img.src = src;
   img.sizes = sizes;
   img.srcset = srcset;
@@ -18,13 +26,16 @@ export const makeResponsive = ({ src, srcset, sizes }) => Component =>
     constructor(props) {
       super(props);
 
+      const cache = getCached({ srcset, sizes });
+
       this.state = {
-        src
+        src: cache || src,
+        cached: !!cache
       };
     }
 
     onLoad = src => {
-      if (this.mounted) {
+      if (this.mounted && src !== this.state.src) {
         this.setState({
           src
         });
@@ -40,7 +51,9 @@ export const makeResponsive = ({ src, srcset, sizes }) => Component =>
 
     componentDidMount() {
       this.mounted = true;
-      this.load();
+      if (!this.state.cached) {
+        this.load();
+      }
     }
 
     componentWillUnmount() {
