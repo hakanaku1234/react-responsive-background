@@ -8,7 +8,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "eslint *.js && webpack --config webpack.prod.js",
+    "build": "yarn lint && webpack --config webpack.prod.js",
+    "lint": "eslint *.js --fix",
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
