@@ -60,11 +60,12 @@ export const makeResponsive = ({ src, srcset, sizes, initial }) => Component =>
     }
   };
 
-function Container({ src, children, ...props }) {
+function Container({ src, children, style, ...props }) {
   return (
     <div
       style={{
-        backgroundImage: 'url(\'' + src + '\')'
+        backgroundImage: 'url(\'' + src + '\')',
+        ...style
       }}
       {...props}
     >
@@ -75,6 +76,7 @@ function Container({ src, children, ...props }) {
 
 Container.propTypes = {
   src: PropTypes.any,
+  style: PropTypes.object,
   children: PropTypes.any,
 };
 
