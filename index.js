@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getSource } from 'from-srcset';
 
-const cache = {};
-const getKey = props => JSON.stringify(props);
-const getCached = props => cache[getKey(props)];
+const lookupTable = {};
+const setCached = (props, src) => lookupTable[JSON.stringify(props)] = src;
+const getCached = props => lookupTable[JSON.stringify(props)];
 
-const createImage = ({ src, srcset, sizes, onLoad }) => {
-  const img = document.createElement('img');
-  img.onload = () => {
-    const src = img.currentSrc || img.src;
-    cache[getKey({ srcset, sizes })] = src;
-    onLoad(src);
-  };
-  img.src = src;
-  img.sizes = sizes;
-  img.srcset = srcset;
-};
+function createImage(props, callback) {
+  const existing = getCached(props);
+  if (existing) {
+    return existing;
+  }
+
+  getSource(props, src => {
+    setCached(props, src);
+    callback(src);
+  });
+}
 
 export const makeResponsive = ({ src, srcset, sizes }) => Component =>
   class Responsive extends React.Component {
@@ -26,33 +27,28 @@ export const makeResponsive = ({ src, srcset, sizes }) => Component =>
     constructor(props) {
       super(props);
 
-      const cache = getCached({ srcset, sizes });
+      // check our cache
+      const existing = getCached({ src, srcset, sizes });
 
       this.state = {
-        src: cache || src,
-        cached: !!cache
+        // set cached src or default src
+        src: existing || src,
+        cached: !!existing
       };
     }
 
-    onLoad = src => {
-      if (this.mounted && src !== this.state.src) {
-        this.setState({
-          src
-        });
-      }
-    };
-
-    load = () => createImage({
-      src,
-      srcset,
-      sizes,
-      onLoad: this.onLoad,
-    });
-
     componentDidMount() {
       this.mounted = true;
+
+      // if a cached result is not found, load it
       if (!this.state.cached) {
-        this.load();
+        createImage({
+          src,
+          srcset,
+          sizes,
+        }, src => this.setState({
+          src,
+        }));
       }
     }
 
