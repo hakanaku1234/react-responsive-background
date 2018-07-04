@@ -14,8 +14,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['stage-0', 'react', 'env'],
-          plugins: ['transform-class-properties'],
+          presets: ['react', 'env'],
+          plugins: ['transform-class-properties', 'transform-object-rest-spread'],
         }
       }
     ]
