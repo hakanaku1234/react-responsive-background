@@ -52,7 +52,7 @@ export const makeResponsive = ({ src, srcset, sizes, initial }) => Component =>
       const { src } = this.state;
 
       return (
-        <Component {...this.props} src={src} >
+        <Component {...this.props} src={src || ''} >
           {children}
         </Component>
       );
