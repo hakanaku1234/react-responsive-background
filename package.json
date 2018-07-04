@@ -1,6 +1,6 @@
 {
   "name": "react-responsive-background",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Responsive background-images",
   "main": "dist/index.js",
   "repository": "https://github.com/wille/react-responsive-background",
