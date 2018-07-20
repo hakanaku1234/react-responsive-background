@@ -14,8 +14,10 @@ const box = {
   height: '100%',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center center',
-  backgroundSize: 'cover'
+  backgroundSize: 'contain'
 };
+
+const defaultImage = 'https://placekitten.com/1000/6000';
 
 const srcset = `
   https://placekitten.com/800/400 1200w,
@@ -51,7 +53,7 @@ const Component = rerender(Responsive);
 
 ReactDOM.render(
   <div style={container}>
-    {[...Array(4)].map((s, i) => <Component key={i} srcset={srcset} style={box} />)}
+    {[...Array(4)].map((s, i) => <Component key={i} src={defaultImage} srcset={srcset} style={box} />)}
   </div>,
   document.getElementById('app')
 );
