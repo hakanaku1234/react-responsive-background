@@ -12,6 +12,8 @@ Use CSS property `background-image` with `srcset` and `size`
 
 ## Usage
 
+All calculated image sources are cached
+
 ### Example with react-emotion
 ```javascript
 import Responsive from 'react-responsive-background';
