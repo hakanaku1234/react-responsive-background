@@ -1791,9 +1791,9 @@ eslint-plugin-babel@^5.1.0:
   dependencies:
     eslint-rule-composer "^0.3.0"
 
-eslint-plugin-react@^7.11.0:
-  version "7.11.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.11.0.tgz#b3124af974c4da978e62a57ea49a7bc26f11e76d"
+eslint-plugin-react@^7.11.1:
+  version "7.11.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.11.1.tgz#c01a7af6f17519457d6116aa94fc6d2ccad5443c"
   dependencies:
     array-includes "^3.0.3"
     doctrine "^2.1.0"
@@ -2169,9 +2169,9 @@ fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
 
-from-srcset@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/from-srcset/-/from-srcset-1.1.1.tgz#580d9cdd8647c1f5354b33681375f140c58a200f"
+from-srcset@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/from-srcset/-/from-srcset-1.1.2.tgz#dbb9638dcc1bebd311f1acce870e43262f07e771"
   dependencies:
     srcset "^1.0.0"
 
@@ -3752,8 +3752,8 @@ react-dom@^16.4.2:
     prop-types "^15.6.0"
 
 react@^16.0.0:
-  version "16.4.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
+  version "16.4.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.4.2.tgz#2cd90154e3a9d9dd8da2991149fdca3c260e129f"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
