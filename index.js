@@ -46,9 +46,13 @@ export const makeResponsive = ({ src, srcset, sizes }) => Component =>
           src,
           srcset,
           sizes,
-        }, src => this.setState({
-          src,
-        }));
+        }, src => {
+          if (this.mounted) {
+            this.setState({
+              src,
+            });
+          }
+        });
       }
     }
 
